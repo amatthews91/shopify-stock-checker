@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <script>
+      doCheck = () => {
+        const url = $('#url')
+          .val()
+          .split('?')[0] + '.js';
+
+        $('#details').empty();
+        $.getJSON(url, (response) => {            
+            $('#details').append('<h2>' + response.title + '</h2>');
+
+            response.variants.forEach((option) => {
+              $('#details').append('<p>' + option.title + ':' + option.inventory_quantity + '</p>');
+            });
+        }).fail((err) => {
+          console.log(err);
+          $('#details').append('<p> Error finding product: ' + err.statusText + '</p>');
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <h1>Stock Checker</h1>
+
+      <form action="javascript:doCheck()">
+        <input id="url" type="text" autofocus />
+        <input type="submit" value="Check stock!" />
+      </form>
+
+      <div id = "details">
+      </div>
+    </div>
+  </body>
+</html>
