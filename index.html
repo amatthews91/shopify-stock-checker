@@ -17,7 +17,8 @@
             $('#details').append('<h2>' + response.title + '</h2>');
 
             response.variants.forEach((option) => {
-              $('#details').append('<p>' + option.title + ':' + option.inventory_quantity + '</p>');
+              const title = option.title === 'Default Title' ? 'One Size' : option.title;
+              $('#details').append('<p>' + title + ': ' + option.inventory_quantity + '</p>');
             });
         }).fail((err) => {
           $('#details').append('<p> Error finding product: ' + err.statusText + '</p>');
