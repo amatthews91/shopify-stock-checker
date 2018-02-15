@@ -20,7 +20,6 @@
               $('#details').append('<p>' + option.title + ':' + option.inventory_quantity + '</p>');
             });
         }).fail((err) => {
-          console.log(err);
           $('#details').append('<p> Error finding product: ' + err.statusText + '</p>');
         });
       }
