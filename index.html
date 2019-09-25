@@ -13,7 +13,7 @@
         } else if (item.available && item.inventory_quantity < 1) {
           return 'In Stock (Quantity unknown)';
         } else {
-          return 'Out of stock';  
+          return 'Out of stock';
         }
       };
 
@@ -22,14 +22,15 @@
           .val()
           .split('?')[0] + '.js';
 
-        $('#details').empty();
-        $.getJSON(url, (response) => {            
+        $('#details').empty().append('<p>Loading...</p>');
+        $.getJSON(url, (response) => {
+            $('#details').empty()
             $('#details').append('<h2>' + response.title + '</h2>');
 
             response.variants.forEach((option) => {
               const title = option.title === 'Default Title' ? 'One Size' : option.title;
 
-              $('#details').append('<p>' + title + ': ' + getStockLevel(option) + '</p>');              
+              $('#details').append('<p>' + title + ': ' + getStockLevel(option) + '</p>');
             });
         }).fail((err) => {
           $('#details').append('<p> Error finding product: ' + err.statusText + '</p>');
