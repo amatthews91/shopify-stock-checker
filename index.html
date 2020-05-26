@@ -23,7 +23,7 @@
           .split('?')[0] + '.js';
 
         $('#details').empty().append('<p>Loading...</p>');
-        $.getJSON(url, (response) => {          
+        $.getJSON(url, (response) => {
             $('#details').empty()
             $('#details').append('<h2>' + response.title + '</h2>');
 
