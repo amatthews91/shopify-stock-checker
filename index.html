@@ -10,7 +10,7 @@
       getStockLevel = (item) => {
         if (item.available && item.inventory_quantity > 0) {
           return item.inventory_quantity;
-        } else if (item.available && item.inventory_quantity < 1) {
+        } else if (item.available && (!item.inventory_quantity || item.inventory_quantity < 1)) {
           return 'In Stock (Quantity unknown)';
         } else {
           return 'Out of stock';
@@ -23,7 +23,7 @@
           .split('?')[0] + '.js';
 
         $('#details').empty().append('<p>Loading...</p>');
-        $.getJSON(url, (response) => {
+        $.getJSON(url, (response) => {          
             $('#details').empty()
             $('#details').append('<h2>' + response.title + '</h2>');
 
